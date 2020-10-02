@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Youtube Subtitle{% endblock %}
+
+{% block body %}
+    {{form_start(form)}}
+    {{form_rest(form)}}
+    <button type="submit">Voir les sous-titres</button>
+    {{form_end(form)}}
+
+    <p id="text">{{text}}</p>
+{% endblock %}
