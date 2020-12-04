@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,40 +20,41 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/", name="default")
+     * @Route("/", name="index")
+     */
+    public function indexAction()
+    {
+        return $this->render('base.html.twig', []);
+    }
+
+    /**
+     * @Route("/subtiltes", name="default")
      */
     public function index(Request $request)
     {
-        $form = $this->createFormBuilder()
-                    ->add('url', TextType::class)
-                    ->setMethod('GET')
-                    ->getForm();
 
+        $response = $this->client->request(
+            'GET',
+            $request->query->get('url')
+        );
+
+        $contents = $response->getContent();
+
+        $data = json_decode($contents, true);
 
         $subtitles ="";
 
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $response = $this->client->request(
-                'GET',
-                $form->get('url')->getData()
-            );
-    
-            $contents = $response->getContent();
-    
-            $data = json_decode($contents, true);
-    
-            foreach($data['events'] as $event){
-                if(isset($event['segs'])){
-                    foreach($event['segs'] as $text){
+        foreach($data['events'] as $event){
+            if(isset($event['segs'])){
+                foreach($event['segs'] as $text){
+                    if($text['utf8'] != "\n"){
                         $subtitles.= $text['utf8']. " ";
-                    }
+                    }                    
                 }
             }
         }
-
-        return $this->render('default/index.html.twig', [
-            'form' => $form->createView(),
+       
+        return new JsonResponse([
             'text' => $subtitles
         ]);
     }
