@@ -4,25 +4,25 @@
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#modalExplication">
-        1 - Voir la vidéo explicative
+        1 - Voir la vidéo explicative <font-awesome-icon icon="play-circle" />
     </button>
-    <a href="https://www.youtube.com/" target="_blank" class="btn" style="background-color:#FF0101; color:white;">2 - Aller sur YouTube</a>
+    <a href="https://www.youtube.com/" target="_blank" class="btn" style="background-color:#FF0101; color:white;">2 - Aller sur YouTube <font-awesome-icon icon="external-link-alt" /></a>
  
     <form class="form-inline mt-4" @submit.prevent="submitForm">
         <label class="my-1 mr-2" for="url">L'URL</label>
         <input type="text" id="url" class="form-control mb-2 mr-sm-2" v-model="url" placeholder="https://www.youtube.com/api/timedtext?v=5f5t99azIud&...">
 
         <button type="submit" class="btn btn-success" :disabled="btnActif">
-            3 - Récupérer les sous-titres
+            3 - Récupérer les sous-titres <font-awesome-icon icon="align-left" />
         </button>
     </form>
 
-    <p v-if="loading">Chargement ...</p>
+    <p v-if="loading"><font-awesome-icon icon="spinner" spin /> Chargement ...</p>
 
     <div class="row">
         <div class="col">
              <textarea id="result" class="form-control" rows="15" v-model="text" placeholder="Vos sous-titres de vidéos apparaitront ici ..."></textarea>
-             <button class="btn btn-primary mt-2" @click="copyText">4 - Copier le texte</button>
+             <button class="btn btn-primary mt-2" @click="copyText">4 - Copier le texte <font-awesome-icon icon="copy" /></button>
         </div>
     </div>
 
@@ -34,6 +34,7 @@
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/SepQQ2vvQxM?rel=0" allowfullscreen></iframe>
                 </div>
+                <p>PS: L'interface a évolué mais la récupération de l'URL sur YouTube se fait toujours de la même façon</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
