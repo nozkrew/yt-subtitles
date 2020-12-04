@@ -42,6 +42,10 @@ class DefaultController extends AbstractController
 
         $data = json_decode($contents, true);
 
+        if(!$data || !array_key_exists('events', $data)){
+            return new JsonResponse(['error' => "Lien incorrect"], 500);
+        }
+
         $subtitles ="";
 
         foreach($data['events'] as $event){
