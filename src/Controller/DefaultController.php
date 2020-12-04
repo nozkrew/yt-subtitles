@@ -52,7 +52,7 @@ class DefaultController extends AbstractController
             if(isset($event['segs'])){
                 foreach($event['segs'] as $text){
                     if($text['utf8'] != "\n"){
-                        $subtitles.= $text['utf8']. " ";
+                        $subtitles.= trim($text['utf8']). " ";
                     }                    
                 }
             }
