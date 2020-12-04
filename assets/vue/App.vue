@@ -4,7 +4,7 @@
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#modalExplication">
-        1 - Voir la vidéo explicative <font-awesome-icon icon="play-circle" />
+        1 - Regarder la vidéo explicative <font-awesome-icon icon="play-circle" />
     </button>
     <a href="https://www.youtube.com/" target="_blank" class="btn" style="background-color:#FF0101; color:white;">2 - Aller sur YouTube <font-awesome-icon icon="external-link-alt" /></a>
  
